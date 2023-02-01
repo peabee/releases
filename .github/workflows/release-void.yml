@@ -13,6 +13,7 @@ on:
         type: boolean
         description: 'Upload release draft'
         required: true
+        default: true
 
 jobs:
   x86_64:
@@ -26,32 +27,50 @@ jobs:
       compat-distro: void
       compat-distro-version: voidpup64
       kernel: '5.15.x'
-      prefix: voidpup64
-      artifact: ${{ github.workflow }}-${{ github.arch }}-${{ github.compat-distro }}-${{ github.compat-distro-version }}-${{ github.run_number }}
+      prefix: vpup64
+      artifact: ${{ github.workflow }}-${{ github.compat-distro-version }}-${{ github.run_number }}
       retention: 1
+
   upload:
     needs: [x86_64]
-    if: github.event.inputs.release == 'true'
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        arch: [x86_64]
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
-          name: ${{ github.workflow }}-${{ github.arch }}-${{ github.compat-distro }}-${{ github.compat-distro-version }}-${{ github.run_number }}
+          name: ${{ github.workflow }}-${{ github.compat-distro-version }}-${{ github.run_number }}
           path: .
-      - name: Generate SHA512 checksums
-        run: |
-          find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
-          find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
+      - name: Rename ISO
+        run: mv -f *.iso VoidPup64-22.02.${{ github.run_number }}.iso
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          name: ${{ github.name }}-${{ github.version }}${{ github.event.inputs.suffix }}
-          tag_name: ${{ github.name }}-${{ github.version }}${{ github.event.inputs.suffix }}
+          name: VoidPup64-22.02.${{ github.run_number }}
+          tag_name: VoidPup64-22.02.${{ github.run_number }}
           fail_on_unmatched_files: true
           files: |
             *.iso
-            *.sfs
-            SHA512checksums.txt
-          draft: true
-          prerelease: false
+            kernel_sources-*.sfs
+  cleanup:
+    needs: upload
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        include:
+          - arch: x86_64
+            keep: 1
+          - arch: x86
+            keep: 1
+    steps:
+      - name: Delete old ${{ matrix.arch }} releases
+        uses: dev-drprasad/delete-older-releases@v0.2.1
+        with:
+          keep_latest: ${{ matrix.keep }}
+          delete_tag_pattern: VoidPup64-22.02.
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
