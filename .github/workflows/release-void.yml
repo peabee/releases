@@ -30,7 +30,7 @@ jobs:
       artifact: ${{ github.workflow }}-${{ github.arch }}-${{ github.compat-distro }}-${{ github.compat-distro-version }}-${{ github.run_number }}
       retention: 1
   upload:
-    needs: build
+    needs: peabee/woof-CE/.github/workflows/build.yml@testing
     if: github.event.inputs.release == 'true'
     runs-on: ubuntu-20.04
     steps:
