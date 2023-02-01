@@ -1,0 +1,57 @@
+name: voidpup
+
+on:
+  workflow_dispatch:
+    branches:
+      - testing
+    inputs:
+      suffix:
+        description: 'Release name suffix, with leading -'
+        required: false
+        default: '-date'
+      release:
+        type: boolean
+        description: 'Upload release draft'
+        required: true
+
+jobs:
+  x86_64:
+    uses: peabee/woof-CE/.github/workflows/build.yml
+    with:
+      repo: peabee/woof-CE
+      ref: voidpup64-22.02
+      name: 'VoidPup64'
+      version: '22.02'
+      arch: x86_64
+      compat-distro: void
+      compat-distro-version: voidpup64
+      kernel: '5.15.x'
+      prefix: voidpup64
+      artifact: ${{ github.workflow }}-${{ github.arch }}-${{ github.compat-distro }}-${{ github.compat-distro-version }}-${{ github.run_number }}
+      retention: 1
+  upload:
+    needs: build
+    if: github.event.inputs.release == 'true'
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ github.workflow }}-${{ github.arch }}-${{ github.compat-distro }}-${{ github.compat-distro-version }}-${{ github.run_number }}
+          path: .
+      - name: Generate SHA512 checksums
+        run: |
+          find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
+          find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: ${{ github.name }}-${{ github.version }}${{ github.event.inputs.suffix }}
+          tag_name: ${{ github.name }}-${{ github.version }}${{ github.event.inputs.suffix }}
+          fail_on_unmatched_files: true
+          files: |
+            *.iso
+            *.sfs
+            SHA512checksums.txt
+          draft: true
+          prerelease: false
