@@ -8,7 +8,7 @@ on:
       suffix:
         description: 'Release name suffix, with leading -'
         required: false
-        default: '-date'
+        default: '-<date>'
       release:
         type: boolean
         description: 'Upload release draft'
@@ -28,32 +28,38 @@ jobs:
       compat-distro-version: voidpup64
       kernel: '5.15.x'
       prefix: vpup64
-      artifact: ${{ github.workflow }}-${{ github.compat-distro-version }}-${{ github.run_number }}
+      artifact: VoidPup64-${{ github.run_number }}
       retention: 1
 
-  upload:
-    needs: [x86_64]
+  upload64:
+    needs: x86_64
     runs-on: ubuntu-20.04
     strategy:
       matrix:
-        arch: [x86_64]
+        arch: x86_64
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
-          name: ${{ github.workflow }}-${{ github.compat-distro-version }}-${{ github.run_number }}
+          name: VoidPup64-${{ github.run_number }}
           path: .
-      - name: Rename ISO
-        run: mv -f *.iso VoidPup64-22.02.iso
+      - name: Generate SHA512 checksums
+        run: |
+          find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
+          find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          name: VoidPup64-22.02.${{ github.run_number }}
-          tag_name: VoidPup64-22.02.${{ github.run_number }}
+          name: VoidPup64${{ github.event.inputs.suffix }}
+          tag_name: VoidPup64${{ github.event.inputs.suffix }}
           fail_on_unmatched_files: true
           files: |
             *.iso
-            kernel_sources-*.sfs
+            *.sfs
+            SHA512checksums.txt
+          draft: true
+          prerelease: false
+  
   cleanup:
     needs: upload
     runs-on: ubuntu-20.04
