@@ -16,7 +16,7 @@ on:
 
 jobs:
   x86_64:
-    uses: peabee/woof-CE/.github/workflows/build.yml@voidpup64-22.02
+    uses: peabee/woof-CE/.github/workflows/build.yml@testing
     with:
       repo: peabee/woof-CE
       ref: voidpup64-22.02
