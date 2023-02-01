@@ -34,9 +34,6 @@ jobs:
   upload64:
     needs: x86_64
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        arch: x86_64
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v3
@@ -50,8 +47,8 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          name: VoidPup64${{ github.event.inputs.suffix }}
-          tag_name: VoidPup64${{ github.event.inputs.suffix }}
+          name: VoidPup64-22.02${{ github.event.inputs.suffix }}
+          tag_name: VoidPup64-22.02${{ github.event.inputs.suffix }}
           fail_on_unmatched_files: true
           files: |
             *.iso
@@ -60,22 +57,15 @@ jobs:
           draft: true
           prerelease: false
   
-  cleanup:
-    needs: upload
+  cleanup64:
+    needs: upload64
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        include:
-          - arch: x86_64
-            keep: 1
-          - arch: x86
-            keep: 1
     steps:
-      - name: Delete old ${{ matrix.arch }} releases
+      - name: Delete old VoidPup64 releases
         uses: dev-drprasad/delete-older-releases@v0.2.1
         with:
-          keep_latest: ${{ matrix.keep }}
-          delete_tag_pattern: VoidPup64-22.02.
+          keep_latest: 1
+          delete_tag_pattern: VoidPup64-22.02
           delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
