@@ -44,7 +44,7 @@ jobs:
           name: ${{ github.workflow }}-${{ github.compat-distro-version }}-${{ github.run_number }}
           path: .
       - name: Rename ISO
-        run: mv -f *.iso VoidPup64-22.02.${{ github.run_number }}.iso
+        run: mv -f *.iso VoidPup64-22.02.iso
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
