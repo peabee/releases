@@ -19,7 +19,7 @@ jobs:
     uses: peabee/woof-CE/.github/workflows/build.yml@testing
     with:
       repo: peabee/woof-CE
-      ref: voidpup64-22.02
+      ref: testing
       name: 'VoidPup64'
       version: '22.02'
       arch: x86_64
