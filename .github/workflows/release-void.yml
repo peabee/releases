@@ -30,7 +30,7 @@ jobs:
       artifact: ${{ github.workflow }}-${{ github.arch }}-${{ github.compat-distro }}-${{ github.compat-distro-version }}-${{ github.run_number }}
       retention: 1
   upload:
-    needs: [x86_64, x86]
+    needs: [x86_64]
     if: github.event.inputs.release == 'true'
     runs-on: ubuntu-20.04
     steps:
