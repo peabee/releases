@@ -3,7 +3,7 @@ name: voidpup
 on:
   workflow_dispatch:
     branches:
-      - testing
+      - main
     inputs:
       suffix:
         description: 'Release name suffix, with leading -'
