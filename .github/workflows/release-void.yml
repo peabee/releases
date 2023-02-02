@@ -48,7 +48,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: VoidPup64-22.02
-          tag_name: ${{ github.event.inputs.suffix }}
+          tag_name: VoidPup64/release${{ github.event.inputs.suffix }}
           fail_on_unmatched_files: true
           files: |
             *.iso
