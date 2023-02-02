@@ -21,14 +21,14 @@ jobs:
     with:
       repo: peabee/woof-CE
       ref: testing
-      name: 'VoidPup64'
-      version: '22.02'
+      name: 'S15Pup64'
+      version: '22.12'
       arch: x86_64
-      compat-distro: void
-      compat-distro-version: voidpup64
+      compat-distro: slackware64
+      compat-distro-version: s15pup64
       kernel: '5.15.x'
-      prefix: vpup64
-      artifact: VoidPup64-${{ github.run_number }}
+      prefix: s15pup64
+      artifact: S15Pup64-${{ github.run_number }}
       retention: 1
 
   x86:
@@ -36,14 +36,14 @@ jobs:
     with:
       repo: peabee/woof-CE
       ref: testing
-      name: 'VoidPup32'
-      version: '22.02'
+      name: 'S15Pup32'
+      version: '22.12'
       arch: x86
-      compat-distro: void
-      compat-distro-version: voidpup32
+      compat-distro: slackware
+      compat-distro-version: s15pup32
       kernel: '5.10.x'
-      prefix: vpup32
-      artifact: VoidPup32-${{ github.run_number }}
+      prefix: s15pup32
+      artifact: S15Pup32-${{ github.run_number }}
       retention: 1
 
   upload64:
@@ -53,7 +53,7 @@ jobs:
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
-          name: VoidPup64-${{ github.run_number }}
+          name: S15Pup64-${{ github.run_number }}
           path: .
       - name: Generate SHA512 checksums
         run: |
@@ -62,8 +62,8 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          name: VoidPup64-22.02
-          tag_name: VoidPup64/release${{ github.event.inputs.suffix }}
+          name: S15Pup64-22.12
+          tag_name: S15Pup64/release${{ github.event.inputs.suffix }}
           fail_on_unmatched_files: true
           files: |
             *.iso
@@ -78,7 +78,7 @@ jobs:
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
-          name: VoidPup32-${{ github.run_number }}
+          name: S15Pup32-${{ github.run_number }}
           path: .
       - name: Generate SHA512 checksums
         run: |
@@ -87,8 +87,8 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          name: VoidPup32-22.02
-          tag_name: VoidPup32/release${{ github.event.inputs.suffix }}
+          name: S15Pup32-22.12
+          tag_name: S15Pup32/release${{ github.event.inputs.suffix }}
           fail_on_unmatched_files: true
           files: |
             *.iso
