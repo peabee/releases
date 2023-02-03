@@ -26,7 +26,7 @@ jobs:
       arch: x86
       compat-distro: ubuntu
       compat-distro-version: upupbb
-      kernel: '4.9.x'
+      kernel: '4.19.x'
       prefix: upupbb
       artifact: BionicPup32-${{ github.run_number }}
       retention: 1
