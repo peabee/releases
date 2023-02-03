@@ -41,7 +41,7 @@ jobs:
       arch: x86
       compat-distro: ubuntu
       compat-distro-version: upupff+d
-      kernel: '5.4.x'
+      kernel: '5.10.x'
       prefix: upupff+d
       artifact: FocalPup32-${{ github.run_number }}
       retention: 1
