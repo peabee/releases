@@ -5,10 +5,6 @@ on:
     branches:
       - main
     inputs:
-      suffix:
-        description: 'Release name suffix, with leading -'
-        required: false
-        default: '-<date>'
       release:
         type: boolean
         description: 'Upload release draft'
@@ -50,6 +46,9 @@ jobs:
     needs: x86_64
     runs-on: ubuntu-20.04
     steps:
+      - name: Get current date
+        id: version
+        run: echo "builddate=$(date +'%y%m%d')" >> $GITHUB_OUTPUT
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
@@ -63,7 +62,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: VoidPup64-22.02
-          tag_name: VoidPup64/release${{ github.event.inputs.suffix }}
+          tag_name: VoidPup64/release${{ steps.version.outputs.builddate }}
           fail_on_unmatched_files: true
           files: |
             *.iso
@@ -75,6 +74,9 @@ jobs:
     needs: x86
     runs-on: ubuntu-20.04
     steps:
+      - name: Get current date
+        id: version
+        run: echo "builddate=$(date +'%y%m%d')" >> $GITHUB_OUTPUT
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
@@ -88,7 +90,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: VoidPup32-22.02
-          tag_name: VoidPup32/release${{ github.event.inputs.suffix }}
+          tag_name: VoidPup32/release${{ steps.version.outputs.builddate }}
           fail_on_unmatched_files: true
           files: |
             *.iso
