@@ -5,10 +5,6 @@ on:
     branches:
       - main
     inputs:
-      suffix:
-        description: 'Release name suffix, with leading -'
-        required: false
-        default: '-<date>'
       release:
         type: boolean
         description: 'Upload release draft'
@@ -50,6 +46,10 @@ jobs:
     needs: x86_64
     runs-on: ubuntu-20.04
     steps:
+      - name: Get current date
+        id: date
+        run: |
+          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
@@ -63,7 +63,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: S15Pup64-22.12
-          tag_name: S15Pup64/release${{ github.event.inputs.suffix }}
+          tag_name: S15Pup64/release-${{ env.date }}
           fail_on_unmatched_files: true
           files: |
             *.iso
@@ -75,6 +75,10 @@ jobs:
     needs: x86
     runs-on: ubuntu-20.04
     steps:
+      - name: Get current date
+        id: date
+        run: |
+          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
@@ -88,7 +92,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: S15Pup32-22.12
-          tag_name: S15Pup32/release${{ github.event.inputs.suffix }}
+          tag_name: S15Pup32/release-${{ env.date }}
           fail_on_unmatched_files: true
           files: |
             *.iso
