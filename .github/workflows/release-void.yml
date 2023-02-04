@@ -62,7 +62,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: VoidPup64-22.02
-          tag_name: VoidPup64/release${{ steps.version.outputs.builddate }}
+          tag_name: VoidPup64/release-${{ steps.version.outputs.builddate }}
           fail_on_unmatched_files: true
           files: |
             *.iso
@@ -90,7 +90,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: VoidPup32-22.02
-          tag_name: VoidPup32/release${{ steps.version.outputs.builddate }}
+          tag_name: VoidPup32/release-${{ steps.version.outputs.builddate }}
           fail_on_unmatched_files: true
           files: |
             *.iso
