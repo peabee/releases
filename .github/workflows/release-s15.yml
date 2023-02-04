@@ -47,9 +47,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Get current date
-        id: date
-        run: |
-          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+        id: version
+        run: echo "builddate=$(date +'%y%m%d')" >> $GITHUB_OUTPUT
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
@@ -63,7 +62,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: S15Pup64-22.12
-          tag_name: S15Pup64/release-${{ env.date }}
+          tag_name: S15Pup64/release-${{ steps.version.outputs.builddate }}
           fail_on_unmatched_files: true
           files: |
             *.iso
@@ -76,9 +75,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Get current date
-        id: date
-        run: |
-          echo "{date}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+        id: version
+        run: echo "builddate=$(date +'%y%m%d')" >> $GITHUB_OUTPUT
       - name: Download build artifact
         uses: actions/download-artifact@v3
         with:
@@ -92,7 +90,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: S15Pup32-22.12
-          tag_name: S15Pup32/release-${{ env.date }}
+          tag_name: S15Pup32/release-${{ steps.version.outputs.builddate }}
           fail_on_unmatched_files: true
           files: |
             *.iso
