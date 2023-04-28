@@ -7,7 +7,7 @@ on:
     inputs:
       release:
         type: boolean
-        description: 'Upload release draft'
+        description: 'Upload release'
         required: true
         default: true
 
@@ -56,7 +56,7 @@ jobs:
           path: .
       - name: Generate SHA512 checksums
         run: |
-          mv s15pup64-22.12.iso S15Pup64-22.12.iso
+          mv s15pup64-22.12.iso S15Pup64-22.12-${{ steps.version.outputs.builddate }}.iso
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
@@ -69,7 +69,6 @@ jobs:
             *.iso
             *.sfs
             SHA512checksums.txt
-          prerelease: ${{ github.event.inputs.release }}
 
   upload32:
     needs: x86
@@ -85,7 +84,7 @@ jobs:
           path: .
       - name: Generate SHA512 checksums
         run: |
-          mv s15pup32-22.12.iso S15Pup32-22.12.iso
+          mv s15pup32-22.12.iso S15Pup32-22.12-${{ steps.version.outputs.builddate }}.iso
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
@@ -98,4 +97,3 @@ jobs:
             *.iso
             *.sfs
             SHA512checksums.txt
-          prerelease: ${{ github.event.inputs.release }}
