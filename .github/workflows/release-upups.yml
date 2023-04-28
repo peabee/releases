@@ -7,7 +7,7 @@ on:
     inputs:
       release:
         type: boolean
-        description: 'Upload release draft'
+        description: 'Upload release'
         required: true
         default: true
 
@@ -71,7 +71,7 @@ jobs:
           path: .
       - name: Generate SHA512 checksums
         run: |
-          mv upupbb-19.03.iso BionicPup32-19.03.iso
+          mv upupbb-19.03.iso BionicPup32-19.03-${{ steps.version.outputs.builddate }}.iso
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
@@ -84,7 +84,6 @@ jobs:
             *.iso
             *.sfs
             SHA512checksums.txt
-          prerelease: ${{ github.event.inputs.release }}
 
   uploadff:
     needs: uff
@@ -100,7 +99,7 @@ jobs:
           path: .
       - name: Generate SHA512 checksums
         run: |
-          mv upupff+d-20.12.iso FocalPup32-20.12.iso
+          mv upupff+d-20.12.iso FocalPup32-20.12-${{ steps.version.outputs.builddate }}.iso
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
@@ -113,7 +112,6 @@ jobs:
             *.iso
             *.sfs
             SHA512checksums.txt
-          prerelease: ${{ github.event.inputs.release }}
 
   uploadjj:
     needs: ujj
@@ -129,7 +127,7 @@ jobs:
           path: .
       - name: Generate SHA512 checksums
         run: |
-          mv upupjj+d-22.04.iso JammyPup32-22.04.iso
+          mv upupjj+d-22.04.iso JammyPup32-22.04-${{ steps.version.outputs.builddate }}.iso
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
@@ -142,4 +140,3 @@ jobs:
             *.iso
             *.sfs
             SHA512checksums.txt
-          prerelease: ${{ github.event.inputs.release }}
