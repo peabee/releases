@@ -59,7 +59,7 @@ jobs:
 
   uploadbb:
     needs: ubb
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Get current date
         id: version
@@ -87,7 +87,7 @@ jobs:
 
   uploadff:
     needs: uff
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Get current date
         id: version
@@ -115,7 +115,7 @@ jobs:
 
   uploadjj:
     needs: ujj
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Get current date
         id: version
