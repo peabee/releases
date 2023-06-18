@@ -44,7 +44,7 @@ jobs:
 
   upload64:
     needs: x86_64
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Get current date
         id: version
@@ -72,7 +72,7 @@ jobs:
 
   upload32:
     needs: x86
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Get current date
         id: version
