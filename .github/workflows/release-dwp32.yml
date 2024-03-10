@@ -45,7 +45,7 @@ jobs:
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: BookwormPup32-23.12
           tag_name: BookwormPup32/release-${{ steps.version.outputs.builddate }}
