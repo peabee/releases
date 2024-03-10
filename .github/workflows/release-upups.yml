@@ -75,7 +75,7 @@ jobs:
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: BionicPup32ng-19.03
           tag_name: BionicPup32/release-${{ steps.version.outputs.builddate }}
@@ -103,7 +103,7 @@ jobs:
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: FocalPup32-20.12
           tag_name: FocalPup32/release-${{ steps.version.outputs.builddate }}
@@ -131,7 +131,7 @@ jobs:
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           name: JammyPup32-22.04
           tag_name: JammyPup32/release-${{ steps.version.outputs.builddate }}
