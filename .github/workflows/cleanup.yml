@@ -14,9 +14,10 @@ jobs:
           - build: NoblePup32
     steps:
       - name: Delete old ${{ matrix.build }} releases
-        uses: dev-drprasad/delete-tag-and-release@v0.2.1
+        uses: dev-drprasad/delete-older-releases@v0.3.3
         with:
-          tag_name: ${{ matrix.build }}/release-
-          delete_release: true
+          delete_tag_pattern: ${{ matrix.build }}
+          keep_latest: 1
+          delete_tags: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
