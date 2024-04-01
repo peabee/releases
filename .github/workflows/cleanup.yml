@@ -7,11 +7,19 @@ on:
 
 jobs:
   cleanup:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         include:
+          - build: BookwormPup32
+          - build: BionicPup32
+          - build: FocalPup32
+          - build: JammyPup32
           - build: NoblePup32
+          - build: S15Pup32
+          - build: S15Pup64
+          - build: VoidPup32
+          - build: VoidPup64
     steps:
       - name: Delete old ${{ matrix.build }} releases
         uses: dev-drprasad/delete-older-releases@v0.3.3
