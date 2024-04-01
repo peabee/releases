@@ -1,0 +1,24 @@
+name: Cleanup releases
+
+on:
+  workflow_dispatch:
+    branches:
+      - main
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        include:
+          - build: NoblePup32
+            keep: 1
+    steps:
+      - name: Delete old ${{ matrix.build }} releases
+        uses: dev-drprasad/delete-older-releases@v0.2.1
+        with:
+          keep_latest: ${{ matrix.keep }}
+          delete_tag_pattern: ${{ matrix.bulid }}/release-
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
