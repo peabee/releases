@@ -12,13 +12,11 @@ jobs:
       matrix:
         include:
           - build: NoblePup32
-            keep: 1
     steps:
       - name: Delete old ${{ matrix.build }} releases
-        uses: dev-drprasad/delete-older-releases@v0.2.1
+        uses: dev-drprasad/delete-tag-and-release@v0.2.1
         with:
-          keep_latest: ${{ matrix.keep }}
-          delete_tag_pattern: ${{ matrix.bulid }}/release-
-          delete_tags: true
+          tag_name: ${{ matrix.build }}/release-
+          delete_release: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
