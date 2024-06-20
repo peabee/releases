@@ -1,4 +1,4 @@
-name: dpupbw32
+name: dpupbw64
 
 on:
   workflow_dispatch:
