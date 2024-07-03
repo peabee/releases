@@ -37,7 +37,7 @@ jobs:
       arch: x86
       compat-distro: slackware
       compat-distro-version: s15pup32
-      kernel: '5.10.x'
+      kernel: '5.15.x'
       prefix: s15pup32
       artifact: S15Pup32-${{ github.run_number }}
       retention: 1
