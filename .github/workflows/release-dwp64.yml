@@ -13,6 +13,7 @@ on:
 
 jobs:
   x86_64:
+    needs: x86_64
     runs-on: ubuntu-24.04
     uses: peabee/woof-CE/.github/workflows/build.yml@testing
     with:
