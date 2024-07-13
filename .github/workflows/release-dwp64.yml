@@ -15,6 +15,7 @@ jobs:
   x86_64:
     uses: peabee/woof-CE/.github/workflows/build.yml@testing
     with:
+      runner: ubuntu-24.04
       repo: peabee/woof-CE
       ref: testing
       name: 'BookwormPup64'
@@ -29,7 +30,7 @@ jobs:
 
   upload64:
     needs: x86_64
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Get current date
         id: version
