@@ -13,9 +13,9 @@ on:
 
 jobs:
   x86_64:
+    runs-on: ubuntu-24.04
     uses: peabee/woof-CE/.github/workflows/build.yml@testing
     with:
-      runner: ubuntu-24.04
       repo: peabee/woof-CE
       ref: testing
       name: 'BookwormPup64'
