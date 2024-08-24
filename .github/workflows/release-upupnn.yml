@@ -1,4 +1,4 @@
-name: NoblePup32
+name: upup32-nn
 
 on:
   workflow_dispatch:
