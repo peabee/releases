@@ -12,7 +12,7 @@ jobs:
       matrix:
         include:
           - build: BookwormPup32
-          - build: BookwormPup64
+          - build: BookwormPup64-ghtest
           - build: BionicPup32
           - build: FocalPup32
           - build: JammyPup32
