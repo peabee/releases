@@ -22,7 +22,7 @@ jobs:
       arch: x86
       compat-distro: ubuntu
       compat-distro-version: upupnn+d
-      kernel: '6.6.x'
+      kernel: '6.1.x'
       prefix: upupnn+bw
       artifact: NoblePup32-${{ github.run_number }}
       retention: 1
