@@ -22,7 +22,7 @@ jobs:
       arch: x86_64
       compat-distro: void
       compat-distro-version: voidpup64
-      kernel: '6.6.x'
+      kernel: '6.12.x'
       prefix: vpup64
       artifact: VoidPup64-${{ github.run_number }}
       retention: 1
