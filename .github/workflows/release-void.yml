@@ -17,6 +17,7 @@ jobs:
     with:
       repo: peabee/woof-CE
       ref: testing
+      runner: ubuntu-24.04
       name: 'VoidPup64'
       version: '22.02'
       arch: x86_64
@@ -32,6 +33,7 @@ jobs:
     with:
       repo: peabee/woof-CE
       ref: testing
+      runner: ubuntu-24.04
       name: 'VoidPup32'
       version: '22.02'
       arch: x86
