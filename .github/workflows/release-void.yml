@@ -17,7 +17,7 @@ jobs:
     with:
       repo: peabee/woof-CE
       ref: testing
-      runner: ubuntu-22.04
+      runner: ubuntu-24.04
       name: 'VoidPup64'
       version: '22.02'
       arch: x86_64
@@ -33,7 +33,7 @@ jobs:
     with:
       repo: peabee/woof-CE
       ref: testing
-      runner: ubuntu-22.04
+      runner: ubuntu-24.04
       name: 'VoidPup32'
       version: '22.02'
       arch: x86
@@ -46,7 +46,7 @@ jobs:
 
   upload64:
     needs: x86_64
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Get current date
         id: version
@@ -74,7 +74,7 @@ jobs:
 
   upload32:
     needs: x86
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Get current date
         id: version
