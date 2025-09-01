@@ -12,6 +12,7 @@ jobs:
       matrix:
         include:
           - build: BookwormPup32
+          - build: TrixiePup32-Retro
           - build: BookwormPup64-ghtest
           - build: BionicPup32
           - build: FocalPup32
