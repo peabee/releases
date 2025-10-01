@@ -22,7 +22,7 @@ jobs:
       arch: x86
       compat-distro: debian
       compat-distro-version: dpupt32
-      kernel: 'debian-bookworm'
+      kernel: 'kernel-kit-output-usrmerge-6.12.x-x86_64'
       prefix: dpupt32
       artifact: TrixiePup32-Retro-${{ github.run_number }}
       retention: 1
