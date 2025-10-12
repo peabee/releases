@@ -1,4 +1,4 @@
-name: DPupT64Wayland
+name: dpupt64wayland
 
 on:
   workflow_dispatch:
