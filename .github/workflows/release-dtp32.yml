@@ -1,4 +1,4 @@
-name: TrixiePup32-Retro
+name: dpupt32Retro
 
 on:
   workflow_dispatch:
