@@ -1,4 +1,4 @@
-name: dpupt32Retro
+name: dpupt32retro
 
 on:
   workflow_dispatch:
