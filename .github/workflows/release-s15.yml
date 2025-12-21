@@ -22,7 +22,7 @@ jobs:
       arch: x86_64
       compat-distro: slackware64
       compat-distro-version: s15pup64
-      kernel: '5.15.x'
+      kernel: '6.12.x'
       prefix: s15pup64
       artifact: S15Pup64-${{ github.run_number }}
       retention: 1
@@ -37,7 +37,7 @@ jobs:
       arch: x86
       compat-distro: slackware
       compat-distro-version: s15pup32
-      kernel: '5.15.x'
+      kernel: '6.12.x'
       prefix: s15pup32
       artifact: S15Pup32-${{ github.run_number }}
       retention: 1
