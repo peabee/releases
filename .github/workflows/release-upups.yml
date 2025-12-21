@@ -1,4 +1,4 @@
-name: upup32 bb,ff,jj
+name: upup32 ff,jj
 
 on:
   workflow_dispatch:
