@@ -12,21 +12,6 @@ on:
         default: true
 
 jobs:
-  ubb:
-    uses: peabee/woof-CE/.github/workflows/build.yml@testing
-    with:
-      repo: peabee/woof-CE
-      ref: testing
-      name: 'BionicPup32'
-      version: '19.03'
-      arch: x86
-      compat-distro: ubuntu
-      compat-distro-version: upupbb
-      kernel: '5.15.x'
-      prefix: upupbb
-      artifact: BionicPup32-${{ github.run_number }}
-      retention: 1
-
   uff:
     uses: peabee/woof-CE/.github/workflows/build.yml@testing
     with:
@@ -37,7 +22,7 @@ jobs:
       arch: x86
       compat-distro: ubuntu
       compat-distro-version: upupff+d
-      kernel: '5.15.x'
+      kernel: '6.12.x'
       prefix: upupff+d
       artifact: FocalPup32-${{ github.run_number }}
       retention: 1
@@ -52,38 +37,10 @@ jobs:
       arch: x86
       compat-distro: ubuntu
       compat-distro-version: upupjj+d
-      kernel: '5.15.x'
+      kernel: '6.12.x'
       prefix: upupjj+d
       artifact: JammyPup32-${{ github.run_number }}
       retention: 1
-
-  uploadbb:
-    needs: ubb
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Get current date
-        id: version
-        run: echo "builddate=$(date +'%y%m%d')" >> $GITHUB_OUTPUT
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: BionicPup32-${{ github.run_number }}
-          path: .
-      - name: Generate SHA512 checksums
-        run: |
-          mv upupbb-19.03.iso BionicPup32-19.03-${{ steps.version.outputs.builddate }}.iso
-          find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
-          find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        with:
-          name: BionicPup32ng-19.03
-          tag_name: BionicPup32/release-${{ steps.version.outputs.builddate }}
-          fail_on_unmatched_files: true
-          files: |
-            *.iso
-            *.sfs
-            SHA512checksums.txt
 
   uploadff:
     needs: uff
