@@ -22,7 +22,7 @@ jobs:
       arch: x86
       compat-distro: ubuntu
       compat-distro-version: upupff+d
-      kernel: '6.12.x'
+      kernel: '6.6.x'
       prefix: upupff+d
       artifact: FocalPup32-${{ github.run_number }}
       retention: 1
@@ -37,7 +37,7 @@ jobs:
       arch: x86
       compat-distro: ubuntu
       compat-distro-version: upupjj+d
-      kernel: '6.12.x'
+      kernel: '6.6.x'
       prefix: upupjj+d
       artifact: JammyPup32-${{ github.run_number }}
       retention: 1
