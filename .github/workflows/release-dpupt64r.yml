@@ -1,0 +1,56 @@
+name: dpupt64retro
+
+on:
+  workflow_dispatch:
+    branches:
+      - main
+    inputs:
+      release:
+        type: boolean
+        description: 'Upload release'
+        required: true
+        default: true
+
+jobs:
+  x86_64:
+    uses: peabee/woof-CE/.github/workflows/build.yml@testing
+    with:
+      repo: peabee/woof-CE
+      ref: testing
+      name: 'TrixiePup64Retro'
+      version: '2509'
+      arch: x86_64
+      compat-distro: debian
+      compat-distro-version: dpupt64retro
+      kernel: 'debian-bookworm'
+      prefix: dpupt64r
+      artifact: TrixiePup64-Retro-${{ github.run_number }}
+      retention: 1
+
+  upload64:
+    needs: x86_64
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Get current date
+        id: version
+        run: echo "builddate=$(date +'%y%m%d')" >> $GITHUB_OUTPUT
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: TrixiePup64-Retro-${{ github.run_number }}
+          path: .
+      - name: Generate SHA512 checksums
+        run: |
+          mv dpupt64r-2509.iso TrixiePup64-Retro-2509-${{ steps.version.outputs.builddate }}.iso
+          find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
+          find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: TrixiePup64-Retro-2509
+          tag_name: TrixiePup64-Retro/release-${{ steps.version.outputs.builddate }}
+          fail_on_unmatched_files: true
+          files: |
+            *.iso
+            *.sfs
+            SHA512checksums.txt
