@@ -22,7 +22,7 @@ jobs:
       arch: x86_64
       compat-distro: ubuntu
       compat-distro-version: resolute64
-      kernel: 'ubuntu-noble'
+      kernel: 'ubuntu-resolute'
       prefix: upup64rr
       artifact: ResolutePup64-${{ github.run_number }}
       retention: 1
