@@ -24,7 +24,7 @@ jobs:
           - build: VoidPup64
     steps:
       - name: Delete old ${{ matrix.build }} releases
-        uses: dev-drprasad/delete-older-releases@v0.3.3
+        uses: dev-drprasad/delete-older-releases@v0.3.4
         with:
           delete_tag_pattern: ${{ matrix.build }}
           keep_latest: 1
