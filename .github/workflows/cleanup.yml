@@ -12,12 +12,14 @@ jobs:
       matrix:
         include:
           - build: BookwormPup32
-          - build: TrixiePup32-Retro
-          - build: TrixiePup64-Wayland
           - build: BookwormPup64-ghtest
+          - build: TrixiePup32-Retro
+          - build: TrixiePup64-Retro
+          - build: TrixiePup64-Wayland
           - build: FocalPup32
           - build: JammyPup32
           - build: NoblePup32
+          - build: ResolutePup64
           - build: S15Pup32
           - build: S15Pup64
           - build: VoidPup32
