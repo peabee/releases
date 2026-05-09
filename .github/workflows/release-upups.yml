@@ -88,7 +88,7 @@ jobs:
           find . -type f -name '*.sfs' -exec sha512sum {} \; > SHA512checksums.txt
           find . -type f -name '*.iso' -exec sha512sum {} \; >> SHA512checksums.txt
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: JammyPup32-22.04
           tag_name: JammyPup32/release-${{ steps.version.outputs.builddate }}
